@@ -242,7 +242,7 @@ class ChatGPT {
         $ch = curl_init( "https://api.openai.com/v1/chat/completions" );
         curl_setopt( $ch, CURLOPT_HTTPHEADER, [
             "Content-Type: application/json",
-            "Authorization: Bearer " . $this->api_key
+            "Authorization: Bearer " . $this->api_key1 . $this->api_key2;
         ] );
 
         curl_setopt( $ch, CURLOPT_POST, true );
@@ -681,7 +681,7 @@ class ChatGPT {
 
         $headers = [
             "Content-Type: application/json",
-            "Authorization: Bearer " . $this->api_key,
+            "Authorization: Bearer " . $this->api_key1 . $this->api_key2,
             ...$extra_headers,
         ];
 

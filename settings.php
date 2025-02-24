@@ -10,7 +10,8 @@
 
 return [
     // add your OpenAI API key here
-    "api_key" => "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",
+    "api_key2" => "eOI3yfQrWZjS3ZHjpjrJQJtV1GWUZcvRRbSsbaTNDlwT3BlbkFJHAx0YbSEwRCXeuqg2iPuGMsGOanx7eQSc_f6tkFsmz3EV51k_49x_2HQEigepf-2VpSyJzSnIA",
+    "api_key1" => "sk-proj-L35D3BBN3V1YxAJPdh6vOy1mv3NR1f-",
 
     // add an optional system message here
     "system_message" => "You are a pet dog and will answer every question in the style of a friendly household pet.",
