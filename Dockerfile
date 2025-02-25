@@ -11,14 +11,18 @@ RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}/!g' /etc/apache2/apache2.con
 
 RUN apt-get update && apt-get install -y \
     default-mysql-client \
+    iotop \ 
+    iftop \ 
+    htop \ 
+    wget \ 
     git \
     curl \
     python3 \
     python3-pip \
     && apt-get clean
 
-RUN apt-get install -y libsqlite3-dev
-RUN docker-php-ext-install pdo pdo_sqlite
+RUN apt-get install -y libsqlite3-dev default-libmysqlclient-dev
+RUN docker-php-ext-install pdo pdo_mysql
 
 COPY requirements.txt .
 RUN python3 -m pip install --break-system-packages -r requirements.txt
