@@ -30,6 +30,7 @@ jobs:
 
       # Step 4: Initialize Terraform
       - name: Terraform init
+        run: cd terraform
         run: terraform init
 
       # Step 5: Plan Terraform deployment
