@@ -30,12 +30,12 @@ return [
     "base_uri" => "",
 
     // storage type
-    "storage_type" => "session", // session or sql
+    "storage_type" => "sql", // session or sql
 
     // database settings (if using sql storage type)
     "db" => [
-        "dsn" => "sqlite:db/chatwtf.db",
-        //"dsn" => "mysql:host=10.0.5.10;dbname=chatwtf",
+//      "dsn" => "sqlite:db/chatwtf.db",
+       "dsn" => "mysql:host=10.0.5.10;dbname=chatwtf",
         "username" => "user123",
         "password" => "password123",
     ],
