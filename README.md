@@ -25,6 +25,7 @@ For improvements :
 Use Github secrets instead of everything in text in the repo (example commented out in the github actions file for reference). 
 Groq key in settings.php will also need to be replaced if the free one provided does not provide enough queries/day. 
 Increase security (it currently has none) by turning on SELinux, adding rate limiters, SSL etc. 
+Allow terraform state to be saved in github for terraform destroy on existing state files. 
 Allow updates through actions instead of terraform only and environment teardowns - use a bastion host.
 Use RDS for database with multi AZ (example provioded in terraform main.tf.bak file). 
 Block code execution and enable the sandbox model for LLM callouts. 
