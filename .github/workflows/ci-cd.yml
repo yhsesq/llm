@@ -30,21 +30,21 @@ jobs:
 
       # Step 4: Initialize Terraform
       - name: Terraform init
-        run: 
-         working-directory: ./terraform
-	 terraform init
+        run: |
+          cd terraform
+          terraform init
 
       # Step 5: Plan Terraform deployment
       - name: Terraform plan
-        run: 
-	 working-directory: ./terraform
-	 terraform plan
+        run: |
+          cd terraform
+          terraform plan
 
       # Step 6: Apply Terraform configuration
       - name: Terraform apply
-        run: 
-         working-directory: ./terraform
-	 terraform apply -auto-approve
+        run: |
+          cd terraform
+          terraform apply -auto-approve
 
       # Step 7: Test Load Balancer (public access)
       - name: Test Load Balancer
