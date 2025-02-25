@@ -25,24 +25,26 @@ jobs:
       # Step 3: Set up Terraform
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v1
-        working-directory: ./terraform
         with:
           terraform_version: 1.10.5
 
       # Step 4: Initialize Terraform
       - name: Terraform init
-        working-directory: ./terraform
-        run: terraform init
+        run: 
+         working-directory: ./terraform
+	 terraform init
 
       # Step 5: Plan Terraform deployment
       - name: Terraform plan
-        working-directory: ./terraform
-        run: terraform plan
+        run: 
+	 working-directory: ./terraform
+	 terraform plan
 
       # Step 6: Apply Terraform configuration
       - name: Terraform apply
-        working-directory: ./terraform
-        run: terraform apply -auto-approve
+        run: 
+         working-directory: ./terraform
+	 terraform apply -auto-approve
 
       # Step 7: Test Load Balancer (public access)
       - name: Test Load Balancer
