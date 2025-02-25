@@ -122,6 +122,7 @@ echo "Executing user data" >/home/ubuntu/userdata.txt
 sleep 60
 apt-get update -y
 apt-get install -y mysql-server git php php-mysql docker.io docker-doc docker-compose docker-compose-v2 containerd runc iotop iftop net-tools nmap htop nano elinks lynx locate
+sed -i -e 's/127\.0\.0\.1/0\.0\.0\.0/g' /etc/mysql/mysql.conf.d/mysqld.cnf
 service mysql start
 git clone ${var.github_repo} /tmp/llm
 cd /tmp/llm
@@ -130,6 +131,7 @@ mysql -u root -e "CREATE USER 'user123'@'%' IDENTIFIED BY 'password123';"
 mysql -u root -e "GRANT ALL ON chatwtf.* TO 'user123'@'%';"
 mysql -u root chatwtf < /tmp/llm/db/mysql.sql
 mysql -u root -e "flush privileges;"
+systemctl restart mysql
 EOF
 
 }
