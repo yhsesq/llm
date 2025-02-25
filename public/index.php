@@ -61,7 +61,7 @@ $current_mode_name = $mode_names[$current_mode];
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/showdown@2.1.0/dist/showdown.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>ChatWTF</title>
+    <title>PetChat</title>
     <script>
         let base_uri = '<?php echo $base_uri; ?>';
         let chat_id = '<?php echo htmlspecialchars( $chat_id ?? '' ); ?>';
@@ -114,9 +114,9 @@ $current_mode_name = $mode_names[$current_mode];
     </nav>
     <main>
         <div class="view conversation-view <?php echo $chat_id ? "show" : ""; ?>" id="chat-messages">
-            <div class="model-name">
-                <i class="fa fa-bolt"></i> <span class="current-model"><?php echo ( str_contains( $current_model, "gpt-4" ) ? "GPT-4" : "GPT-3.5" ) ?></span> <span class="current-mode-name"><?php echo $current_mode_name; ?></span>
-            </div>
+<!--            <div class="model-name">
+                <i class="fa fa-bolt"></i> <span class="current-model"><?php echo ( str_contains( $current_model, "deepseek-r1-distill-llama-70b" ) ? "GPT" : "GPT" ) ?></span> <span class="current-mode-name"><?php echo $current_mode_name; ?></span>
+            </div> -->
             <?php
             $chat_history = $chat_id ? $conversation->get_messages( $chat_id, $db ) : [];
 
@@ -181,8 +181,8 @@ $current_mode_name = $mode_names[$current_mode];
         </div>
         <div class="view new-chat-view <?php echo $chat_id ? "" : "show"; ?>">
             <div class="top-menu">
-                <div class="model-selector">
-                    <div class="model-button button gpt-3 <?php echo ( ! str_contains( $current_model, "gpt-4" ) ? "selected" : "" ); ?>" data-model="gpt-3.5-turbo" data-name="GPT-3.5">
+ <!--               <div class="model-selector">
+                    <div class="model-button button gpt-3 <?php echo ( ! str_contains( $current_model, "deepseek-r1-distill-llama-70b" ) ? "selected" : "" ); ?>" data-model="gpt-3.5-turbo" data-name="GPT-3.5">
                         <i class="fa fa-bolt"></i> GPT-3.5
                         <div class="model-info">
                             <div class="model-info-box">
@@ -190,10 +190,10 @@ $current_mode_name = $mode_names[$current_mode];
 
                                 <p class="secondary">Available to Free and Plus users</p>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
-                    <div class="model-button button gpt-4 <?php echo ( str_contains( $current_model, "gpt-4" ) ? "selected" : "" ); ?>" data-model="gpt-4" data-name="GPT-4">
-                        <i class="fa fa-wand-magic-sparkles"></i> GPT-4
+                    <div class="model-button button llm <?php echo ( str_contains( $current_model, "deepseek-r1-distill-llama-70b" ) ? "selected" : "" ); ?>" data-model="deepseek-r1-distill-llama-70b" data-name="LLM">
+                        <i class="fa fa-wand-magic-sparkles"></i> LLM
                         <div class="model-info">
                             <div class="model-info-box">
                                 <p>Our most capable model, great for creative stuff.</p>
@@ -236,7 +236,7 @@ $current_mode_name = $mode_names[$current_mode];
             </div>
 
             <div class="logo">
-                ChatWTF
+                PetChat
             </div>
         </div>
 
@@ -245,7 +245,7 @@ $current_mode_name = $mode_names[$current_mode];
                 <textarea id="message" rows="1" placeholder="Send a message"></textarea>
                 <button id="send-button"><i class="fa fa-paper-plane"></i></button>
             </div>
-            <div class="disclaimer">ChatWTF uses the OpenAI ChatGPT API but is not affiliated with OpenAI</div>
+            <div class="disclaimer">PetChat is built on ChatWTF and uses the OpenAI ChatGPT API but is not affiliated with OpenAI</div>
         </div>
     </main>
     <script src="<?php echo $base_uri; ?>assets/js/script.js"></script>

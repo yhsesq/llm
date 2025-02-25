@@ -17,7 +17,7 @@ class ChatGPT {
     protected $loadfunction = null;
     protected bool $loaded = false;
     protected $tool_choice = "auto";
-    protected string $model = "gpt-3.5-turbo";
+    protected string $model = "deepseek-r1-distill-llama-70b";
     protected array $params = [];
     protected bool $assistant_mode = false;
     protected ?Assistant $assistant = null;
@@ -239,10 +239,11 @@ class ChatGPT {
         }
 
         // make ChatGPT API request
-        $ch = curl_init( "https://api.openai.com/v1/chat/completions" );
+        $ch = curl_init( "https://api.groq.com/openai/v1/chat/completions" );
         curl_setopt( $ch, CURLOPT_HTTPHEADER, [
             "Content-Type: application/json",
-            "Authorization: Bearer " . $this->api_key1 . $this->api_key2;
+#            "Authorization: Bearer " . $this->api_key1 . $this->api_key2
+            "Authorization: Bearer " . $this->api_key
         ] );
 
         curl_setopt( $ch, CURLOPT_POST, true );
@@ -681,7 +682,8 @@ class ChatGPT {
 
         $headers = [
             "Content-Type: application/json",
-            "Authorization: Bearer " . $this->api_key1 . $this->api_key2,
+#            "Authorization: Bearer " . $this->api_key1 . $this->api_key2,
+            "Authorization: Bearer " . $this->api_key,
             ...$extra_headers,
         ];
 
@@ -724,7 +726,7 @@ class ChatGPT {
         $tools = $this->get_functions( $functions );
 
         $response = $this->openai_api_post(
-            url: "https://api.openai.com/v1/assistants",
+            url: "https://api.groq.com/openai/v1/assistants",
             extra_headers: ["OpenAI-Beta: assistants=v1"],
             postfields: json_encode( [
                 "model" => $model,
@@ -744,7 +746,7 @@ class ChatGPT {
 
     public function create_thread(): Thread {
         $response = $this->openai_api_post(
-            url: "https://api.openai.com/v1/threads",
+            url: "https://api.groq.com/openai/v1/threads",
             extra_headers: ["OpenAI-Beta: assistants=v1"],
         );
 
@@ -758,7 +760,7 @@ class ChatGPT {
         string $assistant_id,
     ): Run {
         $response = $this->openai_api_post(
-            url: "https://api.openai.com/v1/threads/".$thread_id."/runs",
+            url: "https://api.groq.com/openai/v1/threads/".$thread_id."/runs",
             extra_headers: ["OpenAI-Beta: assistants=v1"],
             postfields: json_encode( [
                 "assistant_id" => $assistant_id,
@@ -778,7 +780,7 @@ class ChatGPT {
         string $run_id,
     ): Run {
         $response = $this->openai_api_post(
-            url: "https://api.openai.com/v1/threads/" . $thread_id . "/runs/" . $run_id,
+            url: "https://api.groq.com/openai/v1/threads/" . $thread_id . "/runs/" . $run_id,
             extra_headers: ["OpenAI-Beta: assistants=v1"],
             post: false,
         );
@@ -793,7 +795,7 @@ class ChatGPT {
 
     public function fetch_assistant( string $assistant_id ): Assistant {
         $response = $this->openai_api_post(
-            url: "https://api.openai.com/v1/assistants/" . $assistant_id,
+            url: "https://api.groq.com/openai/v1/assistants/" . $assistant_id,
             extra_headers: ["OpenAI-Beta: assistants=v1"],
             post: false,
         );
@@ -812,7 +814,7 @@ class ChatGPT {
         string $order = "asc",
     ): array {
         $response = $this->openai_api_post(
-            url: "https://api.openai.com/v1/threads/" . $thread_id . "/messages?limit=" . $limit . "&order=" . $order,
+            url: "https://api.groq.com/openai/v1/threads/" . $thread_id . "/messages?limit=" . $limit . "&order=" . $order,
             extra_headers: ["OpenAI-Beta: assistants=v1"],
             post: false,
         );
@@ -824,7 +826,7 @@ class ChatGPT {
         stdClass $message,
     ): void {
         $this->openai_api_post(
-            url: "https://api.openai.com/v1/threads/" . $this->thread_id . "/messages",
+            url: "https://api.groq.com/openai/v1/threads/" . $this->thread_id . "/messages",
             extra_headers: ["OpenAI-Beta: assistants=v1"],
             postfields: json_encode( [
                 "role" => $message->role,
@@ -848,7 +850,7 @@ class ChatGPT {
         }
 
         $this->openai_api_post(
-            url: "https://api.openai.com/v1/threads/".$thread_id."/runs/".$run_id."/submit_tool_outputs",
+            url: "https://api.groq.com/openai/v1/threads/".$thread_id."/runs/".$run_id."/submit_tool_outputs",
             extra_headers: ["OpenAI-Beta: assistants=v1"],
             postfields: json_encode( [
                 "tool_outputs" => $tool_outputs
