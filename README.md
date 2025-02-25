@@ -3,11 +3,11 @@ LLM repository for PetChat
 
 To use :
 Replace AWS account ID and keys as well as account number in the terraform/provider.tf if you dont want to use GitHub Secrets. 
-Groq key in settings.php will also need to be replaced if the free one provided does not provide enough queries/day. 
+Create AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY as repository secrets. 
 Needs a my-key-pair in AWS for injecting into the machines. Deploys to us-west-2. 
 
 How it works :
-The ci-cd yaml file is called by Github Actions on merge. 
+The ci-cd yaml file is called by Github Actions on merge to main. 
 Terraform is used to spin up the AWS environment. 
 To destroy the AWS environment immediately after you can run the destroy shell script in the terraform directory as provided. 
 
@@ -23,8 +23,10 @@ Since it uses the OpenAI API you can point it to a local LLM running on AWS and 
 
 For improvements :
 Use Github secrets instead of everything in text in the repo (example commented out in the github actions file for reference). 
-Increase security (it currently has none) by turning on SELinux, adding rate limiters etc. 
+Groq key in settings.php will also need to be replaced if the free one provided does not provide enough queries/day. 
+Increase security (it currently has none) by turning on SELinux, adding rate limiters, SSL etc. 
 Allow updates through actions instead of terraform only and environment teardowns - use a bastion host.
 Use RDS for database with multi AZ (example provioded in terraform main.tf.bak file). 
 Block code execution and enable the sandbox model for LLM callouts. 
 This is a quick and dirty POC. **Do not use for production**.
+
